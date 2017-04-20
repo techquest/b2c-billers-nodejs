@@ -114,7 +114,6 @@ BillPayment.prototype.validate_customer = function(options, callback){
     var req = {};
     req.customers = custArray;
 
-    console.log(JSON.stringify(req)+" ");
 
     //make the actual call here
     this.interswitch.send({
@@ -130,5 +129,44 @@ BillPayment.prototype.validate_customer = function(options, callback){
             callback(null, response);
         }
     });
+};
+BillPayment.prototype.make_payment = function(options, callback){
+    if(!options) options = {};
+    var err;
+    if(!options.paymentCode) {
+        err = new Error("Payment Code is not specified");
+        callback(err);
+        return;
+    }
+    if(!options.customerId){
+        err = new Error("customerId is not specified");
+        callback(err);
+        return;
+    }
+    if(!options.amount) {
+        err = new Error("amount is not set");
+        callback(err);
+        return;
+    }
+
+    var req = {};
+    req.paymentCode = options.paymentCode;
+    req.customerId = options.customerId;
+    req.amount = options.amount;
+
+    this.interswitch.send({
+        url:Constants.PAYMENT_INQUIRY_RESOURCE_URL, 
+        method:Constants.POST,
+        requestData: req
+    }, 
+    function(err, response, body){
+        if(err) {
+            callback(err);
+        }
+        else {
+            callback(null, response);
+        }
+    });
+
 };
 module.exports = BillPayment;

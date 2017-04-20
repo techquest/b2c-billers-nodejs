@@ -1,19 +1,22 @@
 var BaseSample = require('./BaseSample');
-var ValidateCustomer = function(paymentCode, customerId){
+var MakePayment = function(amount, customerId, paymentCode){
     //inherit
     BaseSample.call(this);
     this.paymentCode = paymentCode;
     this.customerId = customerId;
+    this.amount = amount;
+
 }
 
-ValidateCustomer.prototype.run = function(){
+MakePayment.prototype.run = function(){
 
     //set up options
     var options = {
         paymentCode: this.paymentCode,
-        customerId: this.customerId
+        customerId: this.customerId,
+        amount: this.amount
     };
-    this.billpayment.validate_customer(options, function(err, res){
+    this.billpayment.make_payment(options, function(err, res){
         if(err) {
             //error executing request
             console.log(err);
@@ -26,14 +29,9 @@ ValidateCustomer.prototype.run = function(){
             if(statusCode === 200) {//request was successful
 
                 var body = JSON.parse(res.body);
-
-                var customersArray = body.Customers;
                 
-                var customer = customersArray[0];
-                
-                var fullName = customer.fullName;
-
-                console.log("fullname: "+fullName);
+                var transactionRef = body.transactionRef; //unique transactionRef for this request
+                console.log("Transaction ref is: "+transactionRef);
                 
             }
             else{//it was not successful for a reason
@@ -43,4 +41,4 @@ ValidateCustomer.prototype.run = function(){
     });
 }
 
-module.exports = ValidateCustomer;
+module.exports = MakePayment;
