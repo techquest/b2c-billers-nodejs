@@ -6,6 +6,7 @@ var GetBillers = require('./GetBillers');
 var GetCategory = require('./GetCategory');
 var GetBillersInCategory = require('./GetBillersInCategory');
 var GetPaymentItems = require('./GetPaymentItems');
+var ValidateCustomer = require('./ValidateCustomer');
 
 //uncomment for GetBillers
 // var biller = new GetBillers();
@@ -21,6 +22,14 @@ var GetPaymentItems = require('./GetPaymentItems');
 // biller.run();
 
 //uncomment for GetPaymentItems
-var biller = new GetPaymentItems();
-biller.run();
+// var biller = new GetPaymentItems();
+// biller.run();
 
+//uncomment for validate customer call
+var paymentCode = "40201";//glo recharge test
+        
+//sample customerId for the above paymentCode
+var customerId = "07030241757";
+
+var biller = new ValidateCustomer(paymentCode, customerId);
+biller.run();;
