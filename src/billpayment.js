@@ -34,4 +34,33 @@ BillPayment.prototype.get_categorys = function(callback){
         }
     });
 };
+BillPayment.prototype.get_billers_in_category = function(options, callback){
+    if(!options) {
+        options = {};
+    }
+    
+    if(!options.categoryId){
+        var err = Error("No categoryId set in options object");
+        callback(err);
+        return;
+    }
+
+    var id = options.categoryId;
+    var prefixurl = Constants.GET_CATEGORY_BILLERS_PREFIX;
+    var suffixurl = Constants.GET_CATEGORY_BILLERS_SUFFIX;
+
+    this.interswitch.send({
+        url:prefixurl+id+suffixurl, 
+        method:Constants.GET
+    }, 
+    function(err, response, body){
+        if(err) {
+            callback(err);
+        }
+        else {
+            callback(null, response);
+        }
+    });
+
+};
 module.exports = BillPayment;
