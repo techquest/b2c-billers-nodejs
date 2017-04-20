@@ -63,4 +63,31 @@ BillPayment.prototype.get_billers_in_category = function(options, callback){
     });
 
 };
+BillPayment.prototype.get_payment_items = function(options, callback){
+    if(!options) {
+        options = {};
+    }
+    if(!options.billerId){
+        var err = new Error("No billerId set");
+        callback(err);
+        return;
+    }
+    
+    var id = options.billerId;
+    var prefixurl = Constants.GET_CATEGORY_BILLERS_PAYMENTITEMS_PREFIX;
+    var suffixurl = Constants.GET_CATEGORY_BILLERS_PAYMENTITEMS_SUFFIX;
+
+    this.interswitch.send({
+        url:prefixurl+id+suffixurl, 
+        method:Constants.GET
+    }, 
+    function(err, response, body){
+        if(err) {
+            callback(err);
+        }
+        else {
+            callback(null, response);
+        }
+    });
+};
 module.exports = BillPayment;
