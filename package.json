@@ -1,0 +1,31 @@
+{
+  "name": "interswitch-billers",
+  "version": "0.0.1",
+  "description": "Interswitch Library for Billers",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "maintainers": [
+    {
+      "name": "Lekan Omotayo",
+      "email": "developer@interswitchgroup.com"
+    },
+    {
+      "name": "Ugochukwu Okeke",
+      "email": "developer@interswitchgroup.com"
+    }
+  ],
+  "files": [
+    "LICENSE",
+    "History.md",
+    "Readme.md",
+    "index.js",
+    "src/"
+  ],
+  "author": "Lekan Omotayo",
+  "license": "ISC",
+  "dependencies": {
+    "interswitch": "2.1.4",
+    "request": "^2.81.0"
+  }
+}
