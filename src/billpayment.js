@@ -19,4 +19,19 @@ BillPayment.prototype.get_billers = function(callback){
         }
     });
 };
+
+BillPayment.prototype.get_categorys = function(callback){
+    this.interswitch.send({
+        url:Constants.GET_CATEGORYS_URL, 
+        method:Constants.GET
+    }, 
+    function(err, response, body){
+        if(err) {
+            callback(err);
+        }
+        else {
+            callback(null, response);
+        }
+    });
+};
 module.exports = BillPayment;

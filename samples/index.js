@@ -3,6 +3,14 @@
  */
 
 var GetBillers = require('./GetBillers');
+var GetCategory = require('./GetCategory');
 
-var biller = new GetBillers();
+//uncomment for GetBillers
+// var biller = new GetBillers();
+// biller.run();
+
+
+//uncomment for GetCategory
+var biller = new GetCategory();
 biller.run();
+
