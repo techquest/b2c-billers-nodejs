@@ -169,4 +169,39 @@ BillPayment.prototype.make_payment = function(options, callback){
     });
 
 };
+
+BillPayment.prototype.transaction_inquiry = function(options, callback){
+    if(!options) options = {};
+    var err;
+    if(!options.paymentCode) {
+        err = new Error("Payment Code is not specified");
+        callback(err);
+        return;
+    }
+    if(!options.customerId){
+        err = new Error("customerId is not specified");
+        callback(err);
+        return;
+    }
+
+    var req = {};
+    req.paymentCode = options.paymentCode;
+    req.customerId = options.customerId;
+
+    this.interswitch.send({
+        url:Constants.TRANSACTION_INQUIRY_RESOURCE_URL, 
+        method:Constants.POST,
+        requestData: req
+    }, 
+    function(err, response, body){
+        if(err) {
+            callback(err);
+        }
+        else {
+            callback(null, response);
+        }
+    });
+
+
+};
 module.exports = BillPayment;

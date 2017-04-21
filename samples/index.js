@@ -8,6 +8,7 @@ var GetBillersInCategory = require('./GetBillersInCategory');
 var GetPaymentItems = require('./GetPaymentItems');
 var ValidateCustomer = require('./ValidateCustomer');
 var MakePayment = require('./MakePayment');
+var MakeTransactionInquiry = require('./MakeTransactionInquiry');
 //uncomment for GetBillers
 // var biller = new GetBillers();
 // biller.run();
@@ -35,9 +36,22 @@ var MakePayment = require('./MakePayment');
 
 
 //uncomment for make payment call
-var paymentCode = "40201";//glo recharge test
+//var paymentCode = "40201";//glo recharge test
 //sample customerId for the above paymentCode
+//var customerId = "07030241757";
+//var amount = 500;
+//var biller = new MakePayment(amount, customerId, paymentCode);
+//biller.run();
+
+//uncomment for make-transaction-inquiry
+
+//create options hash
+var options = {};
+var paymentCode = "40201";
 var customerId = "07030241757";
-var amount = 500;
-var biller = new MakePayment(amount, customerId, paymentCode);
+options.paymentCode=paymentCode;
+options.customerId=customerId;
+
+var biller = new MakeTransactionInquiry(options);
+
 biller.run();
