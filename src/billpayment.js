@@ -153,9 +153,10 @@ BillPayment.prototype.make_payment = function(options, callback){
     req.paymentCode = options.paymentCode;
     req.customerId = options.customerId;
     req.amount = options.amount;
+    req.requestReference = options.requestRef;
 
     this.interswitch.send({
-        url:Constants.PAYMENT_INQUIRY_RESOURCE_URL, 
+        url:Constants.MAKE_PAYMENT_RESOURCE_URL, 
         method:Constants.POST,
         requestData: req
     }, 
@@ -167,6 +168,32 @@ BillPayment.prototype.make_payment = function(options, callback){
             callback(null, response);
         }
     });
+
+};
+
+BillPayment.prototype.get_transaction_status = function(options, callback){
+    if(!options) options = {};
+    var err;
+    if(!options.requestReference) {
+        err=new Error("No requestRef is set");
+        callback(err);
+    }
+    this.interswitch.send({
+        url:Constants.TRANSACTION_STATUS_RESOURCE_URL, 
+        method:Constants.GET,
+        headers:{
+            "requestReference": options.requestReference
+        }
+    }, 
+    function(err, response, body){
+        if(err) {
+            callback(err);
+        }
+        else {
+            callback(null, response);
+        }
+    });
+    
 
 };
 
