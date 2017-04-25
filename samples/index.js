@@ -8,7 +8,7 @@ var GetBillersInCategory = require('./GetBillersInCategory');
 var GetPaymentItems = require('./GetPaymentItems');
 var ValidateCustomer = require('./ValidateCustomer');
 var MakePayment = require('./MakePayment');
-var MakeTransactionInquiry = require('./MakeTransactionInquiry');
+ var TransactionStatus = require('./TransactionStatus');
 //uncomment for GetBillers
 // var biller = new GetBillers();
 // biller.run();
@@ -35,23 +35,39 @@ var MakeTransactionInquiry = require('./MakeTransactionInquiry');
 //biller.run();
 
 
+
+
+
+
 //uncomment for make payment call
 //var paymentCode = "40201";//glo recharge test
 //sample customerId for the above paymentCode
 //var customerId = "07030241757";
 //var amount = 500;
-//var biller = new MakePayment(amount, customerId, paymentCode);
-//biller.run();
+/**
+ * The referencePrefix is a unique 4-sequence code for each Biller
+ * You can get your own when you are set up as a merchant on our platform
+ * It is not mandatory to have one
+ * We strongly advice you get one because it will reduce the chances of reference collisions.
+ * 
+ * In the example below, we will be using "test" as out referencePrefix
+ */
+// var referencePrefix = "test"; //
 
-//uncomment for make-transaction-inquiry
+// var requestRef = parseInt(100000000*Math.random()); //unique request reference
 
-//create options hash
-var options = {};
-var paymentCode = "40201";
-var customerId = "07030241757";
-options.paymentCode=paymentCode;
-options.customerId=customerId;
+// requestRef = referencePrefix + requestRef;
 
-var biller = new MakeTransactionInquiry(options);
+// var biller = new MakePayment(amount, customerId, paymentCode, requestRef);
+// biller.run();
 
+
+
+
+
+
+//uncomment for transaction-status
+var biller = new TransactionStatus();
 biller.run();
+//create options hash
+

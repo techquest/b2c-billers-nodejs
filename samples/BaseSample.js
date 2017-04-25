@@ -20,7 +20,6 @@ var BaseSample = function(){
     this.clientSecret = env.uat.clientSecret;// for sandbox env.sandbox.clientSecret;
     this.env = env.uat.environment; // for sandbox env.sandbox.environment;
 
-    console.log("at BaseSample "+this.clientId);
     this.billpayment = new BillPayment(this.clientId, this.clientSecret, this.env);
 }
 
