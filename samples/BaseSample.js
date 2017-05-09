@@ -16,9 +16,9 @@ var BaseSample = function(){
      * env.sandbox.clientId, env.sandbox.clientSecret : For Sandbox
      */
 
-    this.clientId = env.uat.clientId; // for sandbox env.sandbox.clientId;
-    this.clientSecret = env.uat.clientSecret;// for sandbox env.sandbox.clientSecret;
-    this.env = env.uat.environment; // for sandbox env.sandbox.environment;
+    this.clientId = env.sandbox.clientId; // for sandbox env.sandbox.clientId;
+    this.clientSecret = env.sandbox.clientSecret;// for sandbox env.sandbox.clientSecret;
+    this.env = env.sandbox.environment; // for sandbox env.sandbox.environment;
 
     this.billpayment = new BillPayment(this.clientId, this.clientSecret, this.env);
 }

@@ -29,7 +29,7 @@ GetPaymentItems.prototype.run = function(){
                 //var billerArray = JSON.parse(res.body).billers;
                 var body = JSON.parse(res.body);
 
-                var firstBiller = body.billers[0];
+                var firstBiller = body.billers[2];
 
                 
                 var billerId = firstBiller.billerid;

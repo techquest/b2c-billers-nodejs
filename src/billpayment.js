@@ -181,7 +181,7 @@ BillPayment.prototype.get_transaction_status = function(options, callback){
     this.interswitch.send({
         url:Constants.TRANSACTION_STATUS_RESOURCE_URL, 
         method:Constants.GET,
-        headers:{
+        httpHeaders:{
             "requestReference": options.requestReference
         }
     }, 

@@ -5,8 +5,8 @@ var env = {
         environment: "DEVELOPMENT"
     },
     sandbox: {
-        clientId: "",
-        clientSecret:"",
+        clientId: "IKIA6570778A3484D6F33BC7E4165ADCA6CF06B2860A",
+        clientSecret:"DXfUwpuIvMAKN84kv38uspqGOsStgFS0oZMjU7bPwpU=",
         environment: "SANDBOX"
     }
 };

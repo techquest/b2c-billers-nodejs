@@ -4,7 +4,7 @@ var TransactionStatus = function(){
     BaseSample.call(this);
 }
 
-var paymentCode = "40201";//glo recharge test
+var paymentCode = "90101"; //paymentCode for test="40201", paymentCode for sandbox=90101
 //sample customerId for the above paymentCode
 var customerId = "07030241757";
 var amount = 500;
@@ -16,7 +16,7 @@ var amount = 500;
  * 
  * In the example below, we will be using "test" as out referencePrefix
  */
-var referencePrefix = "test"; //
+var referencePrefix = "1456"; //prefix for test environment, use test
 
 var requestRef = parseInt(100000000*Math.random()); //unique request reference
 
@@ -48,7 +48,7 @@ TransactionStatus.prototype.run = function(){
             //check if it was successful
             var statusCode = res.statusCode;
 
-            console.log("status code of response for make payment call is: "+statusCode);
+            
             option = {};
             options.requestReference = requestRef;
             this.billpayment.get_transaction_status(options, function(err, res){
@@ -62,6 +62,8 @@ TransactionStatus.prototype.run = function(){
                     var statusCode = res.statusCode;
                     
                     var body = JSON.parse(res.body);
+
+                    
                     if(body.errors) {
 
                         //there are errors
@@ -70,6 +72,13 @@ TransactionStatus.prototype.run = function(){
                     else{
 
                         //there are no errors
+                        if(statusCode === 200) {
+
+                            var transactionReference = body.transactionRef;
+                            console.log(transactionReference);
+                        }else{
+                            //error in response
+                        }
                     }
                     
                 }

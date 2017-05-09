@@ -79,7 +79,7 @@ currentObj.billpayment.get_categorys(function(err, res){
             //4. Make a call to validate a customer exists, You can skip this
             // and continue with the request as we will verify if the customer exists
             // or not.
-            var paymentCode = "40201";//glo recharge test
+            var paymentCode = "90101"; //paymentCode for test="40201", paymentCode for sandbox=90101
         
             //sample customerId for the above paymentCode
             var customerId = "07030241757";
@@ -117,7 +117,7 @@ currentObj.billpayment.get_categorys(function(err, res){
                  * 
                  * In the example below, we will be using "test" as out referencePrefix
                  */
-                var referencePrefix = "test"; //
+                var referencePrefix = "1456"; //prefix for test environment, use test
 
                 var requestRef = parseInt(100000000*Math.random()); //unique request reference
 
@@ -147,7 +147,8 @@ currentObj.billpayment.get_categorys(function(err, res){
                         if(err) throw err;
                         var transactionStatus = JSON.parse(res.body);
                         if(transactionStatus.errors) throw new Error(transactionStatus.errors);
-                        
+                        var transactionReference = transactionStatus.transactionRef;
+                        console.log("transaction Reference: "+transactionReference);
                     });
 
                 });
